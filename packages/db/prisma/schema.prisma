@@ -15,15 +15,27 @@ datasource db {
 
 model User {
   id        String   @id @default(cuid())
-  email     String   @unique
+  mobile    String   @unique
   username  String   @unique
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   OnRampTransaction OnRampTransaction[]
   Balance  Balance[]
+  sentTransfers  P2PTransfer[]  @relation( name : "FromUserRelation")
+  receivedTranfers   P2PTransfer[] @relation( name: "ToUserRelation")
 }
 
+model P2PTransfer {
+  id          Int @id @default(autoincrement())
+  fromUserId  String
+  toUserId   String
+  fromUser   User @relation( name: "FromUserRelation" , fields: [ fromUserId] , references: [id])
+  toUser    User @relation( name: "ToUserRelation" , fields: [ toUserId] , references: [id])
+  timestamp  DateTime
+  amount      Int
+
+}
 model OnRampTransaction {
   id         Int      @id @default(autoincrement())
   status     OnRampStatus
@@ -31,7 +43,7 @@ model OnRampTransaction {
   provider   String
   amount     Int
   startTime  DateTime
-  userId     String       @unique
+  userId     String       
   user       User      @relation(fields: [userId] , references: [id])
 }  
 

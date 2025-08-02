@@ -21,6 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
     { icon: <FiAward size={20} />, label: 'Rewards', href: '/rewards' },
     { icon: <FiSend size={20} />, label: 'Transfer', href: '/transfer' },
     { icon: <FiDollarSign size={20} />, label: 'Transactions', href: '/transactions' },
+    { icon: <FiDollarSign size={20} />, label: 'P2P Transfer', href: '/p2ptransfer' },
     { icon: <FiSettings size={20} />, label: 'Settings', href: '/settings' },
   ];
 

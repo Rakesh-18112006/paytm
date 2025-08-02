@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import Sidebar from './../../../components/Sidebar';
+import Sidebar from './../../components/Sidebar';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

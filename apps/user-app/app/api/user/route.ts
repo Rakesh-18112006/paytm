@@ -9,8 +9,8 @@ const signupSchema = z.object({
   username: z.string()
     .min(2, 'Username must be at least 2 characters')
     .max(100),
-  email: z.string()
-    .email('Invalid email'),
+  mobile: z.string()
+    .min(10,'Invalid email'),
   password: z.string()
     .min(6, 'Password must be at least 6 characters'),
 });
@@ -19,24 +19,24 @@ const signupSchema = z.object({
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const { username, email, password } = body;
+        const { username, mobile, password } = body;
 
         // Validate using Zod
-        const result = signupSchema.safeParse({ username, email, password });
+        const result = signupSchema.safeParse({ username, mobile, password });
 
         if (!result.success) {
             return NextResponse.json({
                 error: result.error.message,
             });
         }
-        if (!username || !email || !password) {
+        if (!username || !mobile || !password) {
             return NextResponse.json({
                 error: "Missing required fields",
             });
         }
         const existingUserByEmail = await prisma.user.findUnique({
             where: {
-                email,
+                mobile,
             },
         });
         if (existingUserByEmail) {
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
         const newUser = await prisma.user.create({
             data: {
                 username,
-                email,
+                mobile,
                 password:hashedPassword,
             },
         });

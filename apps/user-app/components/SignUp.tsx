@@ -10,8 +10,8 @@ const signupSchema = z.object({
   username: z.string()
     .min(2, 'Username must be at least 2 characters')
     .max(100),
-  email: z.string()
-    .email('Invalid email'),
+  mobile: z.string()
+    .min(10,'Invalid mobile number'),
   password: z.string()
     .min(6, 'Password must be at least 6 characters'),
 });
@@ -20,7 +20,7 @@ export default function Signup() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
+    mobile: '',
     password: '',
   });
   const [msg, setMsg] = useState('');
@@ -145,15 +145,15 @@ export default function Signup() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
+                <label htmlFor="mobile" className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number
                 </label>
                 <motion.div whileHover={{ scale: 1.01 }} whileFocus={{ scale: 1.01 }}>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    value={formData.email}
+                    value={formData.mobile}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition duration-200"
                     placeholder="Enter your email"

@@ -6,7 +6,7 @@ const DashboardPage = async () => {
     const session = await getServerSession(authOptions);
 
     if (!session) {
-        return redirect('/sign-in'); // protect route
+        return redirect('/sign-in'); 
     }
 
     return (
