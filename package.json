@@ -1,6 +1,10 @@
 {
   "name": "with-tailwind",
   "private": true,
+
+
+
+  
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
